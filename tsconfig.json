@@ -4,11 +4,30 @@
     "noImplicitAny": true,
     "module": "ESNext",
     "target": "es5",
-    "jsx": "react",
+    "resolveJsonModule": true, // Включает поддержку импорта JSON файлов
+
+    // Используется для поддержки JSX в TypeScript. Значения для него:
+    // 1.preserve. Синтаксис JSX оставляется в неизменном виде. Обычно используется, если компиляция JSX будет происходить позже, например, с помощью Babel.
+    // 2. react. Преобразует JSX в вызовы React.createElement
+    // 3.react-jsx. Доступно с TypeScript 4.1 и выше. Это значение используется для поддержки нового JSX-трансформера в React 17, который больше не требует явного импорта `React` в каждом файле.
+    // 4. react-jsxdev. Похож на `react-jsx`, но с дополнительной отладочной информацией.
+    "jsx": "react-jsx",
+
     "allowJs": true,
     "moduleResolution": "node",
+
+    // Allow 'import x from y' when a module doesn't have a default export.
     "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true
+
+    // позволяет работаеть с пакетами, которые используют commonjs модули
+    "esModuleInterop": true,
+
+    // определяет базовую директорию, от которой TypeScript будет рассчитывать пути при использовании относительных и абсолютных импортов
+    "baseUrl": ".",
+    "paths": {
+      // алиас. теперь все пути для импорта будут начинаться с "@" (но можно указать другой префикс)
+      "@/*": ["src/*"]
+    }
   },
   "ts-node": {
     "compilerOptions": {
